@@ -4,6 +4,7 @@
 #include <Core/HID/HIDBase.h>
 
 struct GLFWwindow;
+struct GLFWmonitor;
 
 namespace GGE
 {
@@ -144,11 +145,16 @@ namespace GGE
                 return *this;
             }
 
+            [[maybe_unused]] Data Build() const
+            {
+                return m_tmp;
+            }
+
         private:
             Data m_tmp{};
         };
 
-        [[maybe_unused]] Window() = default;
+        [[maybe_unused]] Window();
 
         [[maybe_unused]] Window(
             const String& title,
@@ -180,6 +186,10 @@ namespace GGE
 
         [[maybe_unused]] void MakeFullscreen();
 
+        [[maybe_unused]] void MakeFullscreen(DisplaySize);
+
+        [[maybe_unused]] void MakeFullscreen(uint32, uint32);
+
         [[maybe_unused]] void MakeNormal();
 
         [[maybe_unused]] const String& GetTitle() const { return m_title; }
@@ -208,9 +218,19 @@ namespace GGE
 
         [[maybe_unused]] bool IsHidden() const { return bool(m_bits.hidden); }
 
+        [[maybe_unused]] bool IsOpened() const { return m_opened; }
+
         [[maybe_unused]] void PollOS();
 
-        [[maybe_unused]] float GetElementStateF(HID::DeviceKind, HID::ElementType) const;
+        [[maybe_unused]] HID::ElementType GetLastElement(HID::DeviceKind dk, bool gamepadAxis = false) const
+        {
+            return s_inputState->lastWrite[int(dk)][int(gamepadAxis)];
+        }
+
+        [[maybe_unused]] float GetElementStateF(HID::DeviceKind dk, HID::ElementType et) const
+        {
+            return s_inputState->elems[int(dk)][int(et)];
+        }
 
         [[maybe_unused]] static const char* GetElementName(HID::DeviceKind, HID::ElementType);
 
@@ -219,12 +239,31 @@ namespace GGE
         {
             return static_cast<T>(GetElementStateF(dk, et));
         }
+
+        template<>
+        [[maybe_unused]] bool GetElementState<bool>(HID::DeviceKind dk, HID::ElementType et) const
+        {
+            return GetElementStateF(dk, et) == 1.f;
+        }
     private:
         String m_title{};
         GLFWwindow* m_windowHandle{};
+        GLFWmonitor* m_monitorHandle{};
         DisplayPosition m_position{};
         DisplaySize m_size{};
         Bits m_bits{};
+        bool m_opened{};
+
+    private:
+        struct InputStateType
+        {
+            HID::ElementState elems[int(HID::DeviceKind::COUNT)][HID::kMaxElements];
+            HID::ElementType lastWrite[int(HID::DeviceKind::COUNT)][2]{};
+
+            InputStateType();
+        };
+
+        static inline InputStateType *s_inputState{};
     };
 
 }

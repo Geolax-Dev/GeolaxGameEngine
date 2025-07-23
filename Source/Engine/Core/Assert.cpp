@@ -123,15 +123,13 @@ std::string Internal::GetStackTrace()
     std::string result = "";
 
     for (const auto& entry : trace) {
-        const auto fn = entry.description();
         const auto loc = entry.source_file();
 
-        result += "  at " + fn + "\n";
+        result += "at " + entry.description() + "\n";
 
         if (loc.size())
         {
-            result += "    in " + shrink_path_to_width(loc, 48) +
-                ":" + std::to_string(entry.source_line()) + "\n";
+            result += "  in " + shrink_path_to_width(loc, 48) + ":" + std::to_string(entry.source_line()) + "\n";
         }
     }
 

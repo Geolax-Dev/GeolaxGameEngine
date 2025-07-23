@@ -108,6 +108,8 @@ namespace GGE::HID
         // Get the name of a key
         static const char* GetKeyName(KeyboardKey key);
 
+        static KeyboardKey GetLastPressedKey();
+
         [[maybe_unused]] static DeviceKind GetDeviceKind() { return DeviceKind::eKeyboard; }
     };
 }

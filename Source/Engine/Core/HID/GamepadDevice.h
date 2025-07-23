@@ -23,6 +23,19 @@ namespace GGE::HID
         eDpadDown,
         eDpadLeft,
 
+        // Get by GetRawValue!
+        eLeftX,
+        // Get by GetRawValue!
+        eLeftY,
+        // Get by GetRawValue!
+        eRightX,
+        // Get by GetRawValue!
+        eRightY,
+        // Get by GetRawValue!
+        eLeftTrigger,
+        // Get by GetRawValue!
+        eRightTrigger,
+
         eCross    = eA,
         eCircle   = eB,
         eSquare   = eX,
@@ -38,6 +51,9 @@ namespace GGE::HID
         static const char* GetButtonName(GamepadButton button);
 
         static float GetRawValue(GamepadElement element);
+
+        static GamepadButton GetLastPressedButton();
+        static GamepadElement GetLastUsedAxis();
 
         [[maybe_unused]] static DeviceKind GetDeviceKind() { return DeviceKind::eGamepad; }
     };

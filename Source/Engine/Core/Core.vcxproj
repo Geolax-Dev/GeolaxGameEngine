@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="Assert.h" />
     <ClInclude Include="BuildInfo.h" />
+    <ClInclude Include="Debug\Terminal.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventCategory.h" />
     <ClInclude Include="Event\InputEvents.h" />
@@ -45,6 +46,8 @@
   <ItemGroup>
     <ClCompile Include="Assert.cpp" />
     <ClCompile Include="BuildInfo.cpp" />
+    <ClCompile Include="Debug\TerminalWin32.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="HID\BasicInput.cpp" />
     <ClCompile Include="HID\GamepadDevice.cpp" />
     <ClCompile Include="HID\HIDBase.cpp" />
@@ -183,7 +186,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DISTRIBUTION_READY=1;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -199,6 +202,8 @@
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>

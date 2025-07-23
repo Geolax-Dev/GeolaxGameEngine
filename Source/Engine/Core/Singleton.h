@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Core/Minimal.h>
+#include "Window.h"
 
 namespace GGE
 {

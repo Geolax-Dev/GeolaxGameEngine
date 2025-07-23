@@ -10,3 +10,7 @@ __pragma(warning(pop))
 #pragma warning(disable: 4100 5039 4127 4625 4626 4668 4710 4711 4820 5045 4514)
 
 #define BIT(x) (1u << (x))
+
+#ifndef DISTRIBUTION_READY
+#define DISTRIBUTION_READY (0)
+#endif 

@@ -11,3 +11,8 @@ const char* GGE::HID::KeyboardDevice::GetKeyName(KeyboardKey key)
 {
     return s_input->GetElementName(GetDeviceKind(), ElementType(key));
 }
+
+GGE::HID::KeyboardKey GGE::HID::KeyboardDevice::GetLastPressedKey()
+{
+    return HID::KeyboardKey(s_input->GetLastElement(GetDeviceKind()));
+}
