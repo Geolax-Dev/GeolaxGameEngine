@@ -93,6 +93,16 @@ namespace GGE::HID
         eF11 = 300,
         eF12 = 301,
         // end F keys
+
+        eLeftShift = 340,
+        eLeftCtrl,
+        eLeftAlt,
+        eLeftSuper,
+        eRightShift,
+        eRightCtrl,
+        eRightAlt,
+        eRightSuper,
+        eMenu,
     };
 
     // Keyboard device class
