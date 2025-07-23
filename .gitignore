@@ -1,0 +1,8 @@
+*/.vs/*
+*/.Build/*
+
+*.user
+*.exe
+*.lib
+*.pdb
+*.lastcodeanalysissucceeded
