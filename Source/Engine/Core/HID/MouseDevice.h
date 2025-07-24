@@ -4,14 +4,14 @@
 
 namespace GGE::HID
 {
-    enum class MouseButton : ElementType
+    enum class MouseButton : Element
     {
         eLeft,
         eRight,
         eMiddle,
     };
 
-    enum class MouseElement : ElementType
+    enum class MouseElement : Element
     {
         ePositionX = int(MouseButton::eMiddle) + 1,
         ePositionY,
@@ -22,6 +22,7 @@ namespace GGE::HID
     {
     public:
         static bool IsButtonPressed(MouseButton button);
+        static bool IsButtonReleased(MouseButton button);
         static const char* GetButtonName(MouseButton button);
 
         static int32 GetPositionX();

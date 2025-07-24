@@ -222,26 +222,42 @@ namespace GGE
 
         [[maybe_unused]] void PollOS();
 
-        [[maybe_unused]] HID::ElementType GetLastElement(HID::DeviceKind dk, bool gamepadAxis = false) const
+        [[maybe_unused]] HID::Element GetLastElement(HID::DeviceKind dk, bool gamepadAxis = false) const
         {
             return s_inputState->lastWrite[int(dk)][int(gamepadAxis)];
         }
 
-        [[maybe_unused]] float GetElementStateF(HID::DeviceKind dk, HID::ElementType et) const
+        [[maybe_unused]] HID::Element GetLastElement(bool axis) const
+        {
+            if (axis)
+                s_inputState->lastWrite[int(HID::DeviceKind::eGamepad)][1];
+
+            if (s_inputState->lastAccessDevice == -1)
+                return HID::kInvalidElement;
+
+            return s_inputState->lastWrite[s_inputState->lastAccessDevice][0];
+        }
+
+        [[maybe_unused]] HID::DeviceKind GetLastUsedDeviceKind() const
+        {
+            return HID::DeviceKind(s_inputState->lastAccessDevice);
+        }
+
+        [[maybe_unused]] HID::ElementState GetElementStateF(HID::DeviceKind dk, HID::Element et) const
         {
             return s_inputState->elems[int(dk)][int(et)];
         }
 
-        [[maybe_unused]] static const char* GetElementName(HID::DeviceKind, HID::ElementType);
+        [[maybe_unused]] static const char* GetElementName(HID::DeviceKind, HID::Element);
 
         template<class T>
-        [[maybe_unused]] T GetElementState(HID::DeviceKind dk, HID::ElementType et) const
+        [[maybe_unused]] T GetElementState(HID::DeviceKind dk, HID::Element et) const
         {
             return static_cast<T>(GetElementStateF(dk, et));
         }
 
         template<>
-        [[maybe_unused]] bool GetElementState<bool>(HID::DeviceKind dk, HID::ElementType et) const
+        [[maybe_unused]] bool GetElementState<bool>(HID::DeviceKind dk, HID::Element et) const
         {
             return GetElementStateF(dk, et) == 1.f;
         }
@@ -258,7 +274,8 @@ namespace GGE
         struct InputStateType
         {
             HID::ElementState elems[int(HID::DeviceKind::COUNT)][HID::kMaxElements];
-            HID::ElementType lastWrite[int(HID::DeviceKind::COUNT)][2]{};
+            HID::Element lastWrite[int(HID::DeviceKind::COUNT)][2]{};
+            int lastAccessDevice{ -1 };
 
             InputStateType();
         };

@@ -9,7 +9,7 @@ namespace GGE
 
 namespace GGE::HID
 {
-    typedef uint32 ElementType;
+    typedef uint32 Element;
 
     struct ElementState
     {
@@ -24,15 +24,17 @@ namespace GGE::HID
             return value;
         }
 
-        static constexpr float eIdle = -1;
-        static constexpr float eReleased = 0;
-        static constexpr float ePressed = 1;
+        static constexpr float kIdle = -1;
+        static constexpr float kReleased = 0;
+        static constexpr float kPressed = 1;
     };
 
-    constexpr ElementType kMaxElements = 512u;
+    constexpr Element kMaxElements = 512u;
+    constexpr Element kInvalidElement = uint32(-1);
 
     enum class DeviceKind
     {
+        eNone = -1,
         eKeyboard,
         eMouse,
         eGamepad,

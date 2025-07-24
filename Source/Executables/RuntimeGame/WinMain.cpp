@@ -43,13 +43,12 @@ int WINAPI WinMain(
     {
         ggeWindow.PollOS();
 
-        //if (const auto e = GGE::HID::KeyboardDevice::GetLastPressedKey(); e != GGE::HID::KeyboardKey::eUnknown)
-        //{
-        //    const GGE::SmallString s = GGE::HID::KeyboardDevice::GetKeyName(e);
-        //    GGE::Debug::WriteTerminal(s.c_str(), s.size());
-        //}
+        if (const auto s = GGE::HID::BasicInput::Get().GetLastPressedName(false); s != "(null)")
+        {
+            GGE::Debug::WriteTerminal(s.c_str(), s.size());
+        }
 
-        if (GGE::HID::KeyboardDevice::IsKeyPressed(GGE::HID::KeyboardKey::eEscape))
+        if (GGE::HID::BasicInput::Get().IsPressed(GGE::HID::KeyboardKey::eEscape))
             ggeWindow.Destroy();
     }
 

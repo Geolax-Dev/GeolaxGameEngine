@@ -4,17 +4,22 @@
 
 bool GGE::HID::GamepadDevice::IsButtonPressed(GamepadButton button)
 {
-    return s_input->GetElementState<bool>(GetDeviceKind(), ElementType(button));
+    return s_input->GetElementState<bool>(GetDeviceKind(), Element(button));
+}
+
+bool GGE::HID::GamepadDevice::IsButtonReleased(GamepadButton button)
+{
+    return s_input->GetElementStateF(GetDeviceKind(), Element(button)) == ElementState::kReleased;
 }
 
 const char* GGE::HID::GamepadDevice::GetButtonName(GamepadButton button)
 {
-    return s_input->GetElementName(GetDeviceKind(), ElementType(button));
+    return s_input->GetElementName(GetDeviceKind(), Element(button));
 }
 
 float GGE::HID::GamepadDevice::GetRawValue(GamepadElement element)
 {
-    return s_input->GetElementStateF(GetDeviceKind(), ElementType(element));
+    return s_input->GetElementStateF(GetDeviceKind(), Element(element));
 }
 
 GGE::HID::GamepadButton GGE::HID::GamepadDevice::GetLastPressedButton()

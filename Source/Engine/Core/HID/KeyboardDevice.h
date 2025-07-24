@@ -5,7 +5,7 @@
 namespace GGE::HID
 {
     // Keyboard keys enumeration (reflects the GLFW key codes)
-    enum class KeyboardKey : ElementType
+    enum class KeyboardKey : Element
     {
         eUnknown = 0,
         eSpace = 32,
@@ -111,14 +111,16 @@ namespace GGE::HID
     public:
         // Check if a key is pressed
         static bool IsKeyPressed(KeyboardKey key);
-        // Check if a key was just pressed
-        static bool IsKeyJustPressed(KeyboardKey key);
-        // Check if a key was just released
-        static bool IsKeyJustReleased(KeyboardKey key);
+        // Check if a key is released
+        static bool IsKeyReleased(KeyboardKey key);
         // Get the name of a key
         static const char* GetKeyName(KeyboardKey key);
-
+        // Get last used key (pressed)
         static KeyboardKey GetLastPressedKey();
+
+        static bool IsCtrl(bool right = false);
+        static bool IsShift(bool right = false);
+        static bool IsAlt(bool right = false);
 
         [[maybe_unused]] static DeviceKind GetDeviceKind() { return DeviceKind::eKeyboard; }
     };

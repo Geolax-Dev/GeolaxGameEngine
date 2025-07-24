@@ -5,7 +5,7 @@
 namespace GGE::HID
 {
 
-    enum class GamepadElement : ElementType
+    enum class GamepadElement : Element
     {
         eA,
         eB,
@@ -48,6 +48,7 @@ namespace GGE::HID
     {
     public:
         static bool IsButtonPressed(GamepadButton button);
+        static bool IsButtonReleased(GamepadButton button);
         static const char* GetButtonName(GamepadButton button);
 
         static float GetRawValue(GamepadElement element);

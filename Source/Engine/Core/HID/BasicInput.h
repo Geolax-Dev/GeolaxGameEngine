@@ -27,6 +27,31 @@ namespace GGE::HID
         {
             return s_window;
         }
+
+        bool IsPressed(KeyboardKey key) const;
+        bool IsReleased(KeyboardKey key) const;
+        KeyboardKey GetLastPressedKB() const;
+
+        bool IsPressed(MouseButton btn) const;
+        bool IsReleased(MouseButton btn) const;
+        float GetScrollDelta() const;
+        int32 GetMouseX() const;
+        int32 GetMouseY() const;
+        MouseButton GetLastPressedMS() const;
+
+        bool IsPressed(GamepadButton btn) const;
+        bool IsReleased(GamepadButton btn) const;
+        // axes, buttons, triggers
+        float GetGamepadRawValue(GamepadElement e) const;
+        GamepadButton GetLastPressedGP() const;
+        GamepadElement GetLastAxisGP() const;
+
+        Element GetLastPressed(bool axes) const;
+        SmallString GetLastPressedName(bool axes) const;
+
+        bool IsCtrl(bool right = false) const;
+        bool IsShift(bool right = false) const;
+        bool IsAlt(bool right = false) const;
     private:
         static inline const Window* s_window{};
     };

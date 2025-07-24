@@ -197,44 +197,49 @@ namespace GGE
     {
         {   // gather keyboard input state
             auto& kbd = s_inputState->elems[int(HID::DeviceKind::eKeyboard)];
-            auto& lw = s_inputState->lastWrite[int(HID::DeviceKind::eKeyboard)][0];
 
             for (int key = GLFW_KEY_SPACE; key < GLFW_KEY_LAST; ++key)
             {
                 // key state
                 auto& kstate = kbd[key];
+                bool wasSet = false;
 
                 switch (glfwGetKey(m_windowHandle, key))
                 {
                     case GLFW_PRESS:
                     {
-                        kstate = HID::ElementState::ePressed;
-                        lw = HID::ElementType(key);
+                        kstate = HID::ElementState::kPressed;
+                        wasSet = true;
                     } break;
 
                     case GLFW_RELEASE:
                     {
-                        if (kstate != HID::ElementState::eIdle)
+                        if (kstate != HID::ElementState::kIdle)
                         {
-                            if (kstate == HID::ElementState::ePressed)
+                            if (kstate == HID::ElementState::kPressed)
                             {
-                                kstate = HID::ElementState::eReleased;
-                                lw = HID::ElementType(key);
+                                kstate = HID::ElementState::kReleased;
+                                wasSet = true;
                             }
                             else
                             {
-                                kstate = HID::ElementState::eIdle;
-                                lw = HID::ElementType(key);
+                                kstate = HID::ElementState::kIdle;
+                                wasSet = true;
                             }
                         }
                     } break;
+                }
+
+                if (wasSet)
+                {
+                    s_inputState->lastWrite[int(HID::DeviceKind::eKeyboard)][0] = HID::Element(key);
+                    s_inputState->lastAccessDevice = int(HID::DeviceKind::eKeyboard);
                 }
             }
         }
 
         {   // gather mouse input state
             auto& ms = s_inputState->elems[int(HID::DeviceKind::eMouse)];
-            auto& lw = s_inputState->lastWrite[int(HID::DeviceKind::eMouse)][0];
 
             {
                 double xpos, ypos;
@@ -254,32 +259,40 @@ namespace GGE
             for (auto btn : buttons)
             {
                 auto& kstate = ms[btn];
+                bool wasSet = false;
 
                 switch (glfwGetMouseButton(m_windowHandle, btn))
                 {
                     case GLFW_PRESS:
                     {
-                        kstate = HID::ElementState::ePressed;
-                        lw = HID::ElementType(btn);
+                        kstate = HID::ElementState::kPressed;
+                        wasSet = true;
                     } break;
 
                     case GLFW_RELEASE:
                     {
-                        if (kstate != HID::ElementState::eIdle)
+                        if (kstate != HID::ElementState::kIdle)
                         {
-                            if (kstate == HID::ElementState::ePressed)
+                            if (kstate == HID::ElementState::kPressed)
                             {
-                                kstate = HID::ElementState::eReleased;
-                                lw = HID::ElementType(btn);
+                                kstate = HID::ElementState::kReleased;
+                                wasSet = true;
                             }
                             else
                             {
-                                kstate = HID::ElementState::eIdle;
-                                lw = HID::ElementType(btn);
+                                kstate = HID::ElementState::kIdle;
+                                wasSet = true;
                             }
                         }
                     } break;
                 }
+
+                if (wasSet)
+                {
+                    s_inputState->lastWrite[int(HID::DeviceKind::eMouse)][0] = HID::Element(btn);
+                    s_inputState->lastAccessDevice = int(HID::DeviceKind::eMouse);
+                }
+
             }
 
         }
@@ -290,7 +303,6 @@ namespace GGE
                 if (glfwJoystickIsGamepad(gamepadIndex))
                 {
                     auto& gp = s_inputState->elems[int(HID::DeviceKind::eGamepad)];
-                    auto& lw = s_inputState->lastWrite[int(HID::DeviceKind::eGamepad)];
 
                     GLFWgamepadstate state;
                     if (glfwGetGamepadState(gamepadIndex, &state))
@@ -298,38 +310,46 @@ namespace GGE
                         for (int key = int(HID::GamepadButton::eA); key < int(HID::GamepadButton::eDpadLeft); ++key)
                         {
                             auto& kstate = gp[key];
+                            bool wasSet = false;
 
                             switch (state.buttons[key])
                             {
-                            case GLFW_PRESS:
-                            {
-                                kstate = HID::ElementState::ePressed;
-                                lw[0] = HID::ElementType(key);
-                            } break;
-
-                            case GLFW_RELEASE:
-                            {
-                                if (kstate != HID::ElementState::eIdle)
+                                case GLFW_PRESS:
                                 {
-                                    if (kstate == HID::ElementState::ePressed)
+                                    kstate = HID::ElementState::kPressed;
+                                    wasSet = true;
+                                } break;
+
+                                case GLFW_RELEASE:
+                                {
+                                    if (kstate != HID::ElementState::kIdle)
                                     {
-                                        kstate = HID::ElementState::eReleased;
-                                        lw[0] = HID::ElementType(key);
+                                        if (kstate == HID::ElementState::kPressed)
+                                        {
+                                            kstate = HID::ElementState::kReleased;
+                                            wasSet = true;
+                                        }
+                                        else
+                                        {
+                                            kstate = HID::ElementState::kIdle;
+                                            wasSet = true;
+                                        }
                                     }
-                                    else
-                                    {
-                                        kstate = HID::ElementState::eIdle;
-                                        lw[0] = HID::ElementType(key);
-                                    }
-                                }
-                            } break;
+                                } break;
                             }
+
+                            if (wasSet)
+                            {
+                                s_inputState->lastWrite[int(HID::DeviceKind::eGamepad)][0] = HID::Element(key);
+                                s_inputState->lastAccessDevice = int(HID::DeviceKind::eGamepad);
+                            }
+
                         }
 
                         for (int axis = int(HID::GamepadElement::eLeftX); axis < int(HID::GamepadElement::eRightTrigger); ++axis)
                         {
                             gp[axis] = state.axes[axis - int(HID::GamepadButton::eDpadLeft)];
-                            lw[1] = HID::ElementType(axis);
+                            s_inputState->lastWrite[int(HID::DeviceKind::eGamepad)][1] = HID::Element(axis);
                         }
                     }
 
@@ -341,7 +361,7 @@ namespace GGE
         glfwPollEvents();
     }
 
-    const char* Window::GetElementName(HID::DeviceKind dk, HID::ElementType et)
+    const char* Window::GetElementName(HID::DeviceKind dk, HID::Element et)
     {
         switch (dk)
         {
@@ -355,9 +375,9 @@ namespace GGE
             {
                 switch (et)
                 {
-                    case static_cast<HID::ElementType>(HID::MouseButton::eLeft): return "LMB";
-                    case static_cast<HID::ElementType>(HID::MouseButton::eRight): return "RMB";
-                    case static_cast<HID::ElementType>(HID::MouseButton::eMiddle): return "MMB";
+                    case static_cast<HID::Element>(HID::MouseButton::eLeft): return "LMB";
+                    case static_cast<HID::Element>(HID::MouseButton::eRight): return "RMB";
+                    case static_cast<HID::Element>(HID::MouseButton::eMiddle): return "MMB";
                 }
             }
 
@@ -365,25 +385,26 @@ namespace GGE
             {
                 switch (et)
                 {
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eA): return "A";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eB): return "B";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eX): return "X";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eY): return "Y";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eLeftBumper): return "LeftBumper";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eRightBumper): return "RightBumper";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eBack): return "Back";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eStart): return "Start";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eGuide): return "Guide";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eLeftThumb): return "LeftThumb";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eRightThumb): return "RightThumb";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eDpadUp): return "DpadUp";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eDpadRight): return "DpadRight";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eDpadDown): return "DpadDown";
-                    case static_cast<HID::ElementType>(HID::GamepadElement::eDpadLeft): return "DpadLeft";
+                    case static_cast<HID::Element>(HID::GamepadElement::eA): return "A";
+                    case static_cast<HID::Element>(HID::GamepadElement::eB): return "B";
+                    case static_cast<HID::Element>(HID::GamepadElement::eX): return "X";
+                    case static_cast<HID::Element>(HID::GamepadElement::eY): return "Y";
+                    case static_cast<HID::Element>(HID::GamepadElement::eLeftBumper): return "LeftBumper";
+                    case static_cast<HID::Element>(HID::GamepadElement::eRightBumper): return "RightBumper";
+                    case static_cast<HID::Element>(HID::GamepadElement::eBack): return "Back";
+                    case static_cast<HID::Element>(HID::GamepadElement::eStart): return "Start";
+                    case static_cast<HID::Element>(HID::GamepadElement::eGuide): return "Guide";
+                    case static_cast<HID::Element>(HID::GamepadElement::eLeftThumb): return "LeftThumb";
+                    case static_cast<HID::Element>(HID::GamepadElement::eRightThumb): return "RightThumb";
+                    case static_cast<HID::Element>(HID::GamepadElement::eDpadUp): return "DpadUp";
+                    case static_cast<HID::Element>(HID::GamepadElement::eDpadRight): return "DpadRight";
+                    case static_cast<HID::Element>(HID::GamepadElement::eDpadDown): return "DpadDown";
+                    case static_cast<HID::Element>(HID::GamepadElement::eDpadLeft): return "DpadLeft";
                 }
             }
 
             case HID::DeviceKind::COUNT:
+            case HID::DeviceKind::eNone:
             default:
                 break;
         }
@@ -395,7 +416,7 @@ namespace GGE
     {
         for (auto& elms : elems)
         {
-            std::fill_n(elms, std::size(elms), HID::ElementState::eIdle);
+            std::fill_n(elms, std::size(elms), HID::ElementState::kIdle);
         }
     }
 
