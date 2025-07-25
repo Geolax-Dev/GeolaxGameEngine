@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+    <!-- Match any instantiation of SIMDString<INTERNAL_SIZE, Allocator> -->
+    <Type Name="SIMDString&lt;*,*&gt;">
+
+        <DisplayString Condition="m_ptr &lt; 0x0000f00000000000">len={m_length}, {m_ptr}</DisplayString>
+        <DisplayString Condition="m_ptr &gt; 0x0000f00000000000">len={m_length}, {m_buffer}</DisplayString>
+        <!-- Small‑string‑buffer mode (inline) -->
+        <!--
+        <DisplayString Condition="m_allocator.m_allocated == INTERNAL_SIZE">
+            {&amp;m_buffer[0],s,m_length}
+        </DisplayString>
+
+        -->
+        <!-- Heap‑allocated or shared‑const mode -->
+        <!--
+        <DisplayString>
+            {m_ptr,s,m_length}
+        </DisplayString>
+
+        <Expand>
+            <Item Name="Length">m_length</Item>
+            <Item Name="Capacity">
+                m_allocator.m_allocated == 0 ? m_length : m_allocator.m_allocated
+            </Item>
+        </Expand>-->
+
+    </Type>
+</AutoVisualizer>

@@ -7,6 +7,7 @@
 #include <mutex>
 
 #include <windows.h>
+#include <Core/BuildInfo.h>
 
 static bool s_enabled = false;
 
@@ -72,6 +73,9 @@ void GGE::Debug::EnableTerminal()
         std::wclog.clear();
         std::wcerr.clear();
         std::wcin.clear();
+
+        const BuildInfo bi = GetBuildInfo();
+        std::cout << "Starting GGE Engine v" << bi.Major << "." << bi.Minor << " [build " << bi.Build << "]\n";
 
         s_enabled = true;
     }

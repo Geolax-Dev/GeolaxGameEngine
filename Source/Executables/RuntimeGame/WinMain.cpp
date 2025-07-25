@@ -4,6 +4,9 @@
 #include <Core/ThreadPool.h>
 #include <Core/HID/BasicInput.h>
 #include <Core/Window.h>
+#include <Core/IO/FileResourceManager.h>
+#include <Core/IO/RealFileSystemProvider.h>
+#include <Core/ApplicationInfo.h>
 
 GUARD_EXTERNAL_INCLUDE_BEGIN
 #include <Windows.h>
@@ -37,6 +40,23 @@ int WINAPI WinMain(
     GGE::HID::BasicInput::ResetWindow(ggeWindow);
     GGE::HID::BasicInput::Create();
 
+    GGE::IO::FileResourceManager::Create();
+    GGE::IO::FileResourceManager::Get().RegisterFileSystemProvider(
+        std::make_shared<GGE::IO::RealFileSystemProvider>(
+            GGE::IO::FileResourceManager::Get().GetExecutableDirectory()
+        )
+    );
+
+    const GGE::String hw = "Hello World!";
+
+    {
+        const auto cachedCount = GGE::IO::FileResourceManager::Get().CacheVirtualTree("local");
+        std::cout << "Cached " << cachedCount << " resources in the virtual tree 'local'." << std::endl;
+    }
+
+    // example of loading a resource
+    GGE::IO::RawResource resource = GGE::IO::FileResourceManager::Get().LoadSync("local/Account.xml");
+
     std::cout << "Hello!";
 
     while (ggeWindow.IsOpened())
@@ -67,6 +87,8 @@ int WINAPI WinMain(
 
     //    glfwDestroyWindow(window);
     //}
+
+    GGE::IO::FileResourceManager::Destroy();
 
     GGE::HID::BasicInput::Destroy();
 

@@ -37,5 +37,10 @@ namespace GGE
         virtual void OnDestroy() {}
     private:
         static inline T* s_instance{};
+
+        Singleton(const Singleton&) = delete;
+        Singleton& operator=(const Singleton&) = delete;
+        Singleton(Singleton&&) = delete;
+        Singleton& operator=(Singleton&&) = delete;
     };
 }

@@ -23,20 +23,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationInfo.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="BuildInfo.h" />
     <ClInclude Include="Debug\Terminal.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventCategory.h" />
     <ClInclude Include="Event\InputEvents.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="HID\GamepadDevice.h" />
     <ClInclude Include="HID\HIDBase.h" />
     <ClInclude Include="HID\BasicInput.h" />
     <ClInclude Include="HID\KeyboardDevice.h" />
     <ClInclude Include="HID\MouseDevice.h" />
+    <ClInclude Include="IO\FileResourceManager.h" />
+    <ClInclude Include="IO\LRUCache.h" />
+    <ClInclude Include="IO\RealFileSystemProvider.h" />
     <ClInclude Include="Macros\MacroNamespace.h" />
     <ClInclude Include="Macros\MacroUtils.h" />
     <ClInclude Include="Minimal.h" />
+    <ClInclude Include="Parse\INI.h" />
+    <ClInclude Include="Parse\inih\ini.h" />
     <ClInclude Include="Primitives.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="String.h" />
@@ -44,15 +51,28 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationInfo.cpp" />
     <ClCompile Include="Assert.cpp" />
     <ClCompile Include="BuildInfo.cpp" />
     <ClCompile Include="Debug\TerminalWin32.cpp" />
+    <ClCompile Include="IO\FileResourceManager.cpp" />
+    <ClCompile Include="Parse\INI.cpp" />
+    <ClCompile Include="Parse\inih\ini.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">Level3</WarningLevel>
+    </ClCompile>
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="HID\BasicInput.cpp" />
     <ClCompile Include="HID\GamepadDevice.cpp" />
     <ClCompile Include="HID\HIDBase.cpp" />
     <ClCompile Include="HID\KeyboardDevice.cpp" />
     <ClCompile Include="HID\MouseDevice.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="NatvisFile.natvis" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

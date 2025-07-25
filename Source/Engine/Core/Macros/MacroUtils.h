@@ -7,7 +7,7 @@ __pragma(warning(push)) \
 #define GUARD_EXTERNAL_INCLUDE_END \
 __pragma(warning(pop))
 
-#pragma warning(disable: 4100 5039 4127 4625 4626 4668 4710 4711 4820 5045 4514)
+#pragma warning(disable: 4100 4127 4324 4514 4625 4626 4668 4710 4711 4820 5039 5045)
 
 #define BIT(x) (1u << (x))
 

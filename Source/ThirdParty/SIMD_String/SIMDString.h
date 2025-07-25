@@ -1395,11 +1395,11 @@ public:
             ::memcpy(resultData + lhs.m_length, rhs.data(), rhs.m_length + 1);
         }
 
-        return std::move(result);
+        return result;
     }
 
     constexpr inline friend SIMDString operator+(const SIMDString& lhs, SIMDString&& rhs) {
-        return std::move(rhs.insert(0, lhs));
+        return rhs.insert(0, lhs);
     }
 
     constexpr inline friend SIMDString operator+(const SIMDString& lhs, const_pointer rhs) {
@@ -1421,7 +1421,7 @@ public:
         }
 
         // Copy s to output string
-        return std::move(result);
+        return result;
     }
 
     constexpr inline friend SIMDString operator+(const SIMDString& lhs, const value_type rhs) {
@@ -1440,7 +1440,7 @@ public:
             resultData[result.m_length - 1] = rhs;
             resultData[result.m_length] = '\0';
         }
-        return std::move(result);
+        return result;
     }
 
     constexpr friend SIMDString operator+(const_pointer lhs, const SIMDString& rhs) {
@@ -1454,13 +1454,13 @@ public:
         ::memcpy(resultData, lhs, L);
         ::memcpy(resultData + L, rhs.data(), rhs.m_length + 1);
 
-        return std::move(result);
+        return result;
     }
 
     constexpr friend SIMDString operator+(const value_type lhs, const SIMDString& rhs) {
         SIMDString result(rhs.m_length + 1, lhs);
         ::memcpy(result.data() + 1, rhs.data(), rhs.m_length + 1);
-        return std::move(result);
+        return result;
     }
 
     constexpr inline friend SIMDString operator+(const_pointer lhs, SIMDString&& rhs) {

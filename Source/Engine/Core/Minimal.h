@@ -6,6 +6,7 @@
 #include <Core/Primitives.h>
 #include <Core/Assert.h>
 #include <Core/String.h>
+#include <Core/HashTable.h>
 
 namespace GGE
 {

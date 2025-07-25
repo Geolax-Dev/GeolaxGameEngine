@@ -72,6 +72,27 @@
     <ClInclude Include="Debug\Terminal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IO\FileResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\LRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\RealFileSystemProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parse\inih\ini.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parse\INI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BuildInfo.cpp">
@@ -101,5 +122,20 @@
     <ClCompile Include="Debug\TerminalWin32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IO\FileResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parse\inih\ini.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parse\INI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="NatvisFile.natvis" />
   </ItemGroup>
 </Project>
