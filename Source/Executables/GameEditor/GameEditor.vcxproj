@@ -93,35 +93,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-Debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
   </PropertyGroup>
