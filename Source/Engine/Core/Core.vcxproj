@@ -24,8 +24,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationInfo.h" />
+    <ClInclude Include="App\App.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="BuildInfo.h" />
+    <ClInclude Include="Configuration.h" />
     <ClInclude Include="Debug\Terminal.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventCategory.h" />
@@ -43,27 +45,33 @@
     <ClInclude Include="Macros\MacroUtils.h" />
     <ClInclude Include="Minimal.h" />
     <ClInclude Include="Parse\INI.h" />
-    <ClInclude Include="Parse\inih\ini.h" />
+    <ClInclude Include="Parse\inih\cini.h" />
     <ClInclude Include="Primitives.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Subsystems\BasicsSubsystem.h" />
+    <ClInclude Include="Subsystems\ISubsystem.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApplicationInfo.cpp" />
+    <ClCompile Include="App\App.cpp" />
     <ClCompile Include="Assert.cpp" />
     <ClCompile Include="BuildInfo.cpp" />
+    <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Debug\TerminalWin32.cpp" />
     <ClCompile Include="IO\FileResourceManager.cpp" />
     <ClCompile Include="Parse\INI.cpp" />
-    <ClCompile Include="Parse\inih\ini.c">
+    <ClCompile Include="Parse\inih\cini.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">Level3</WarningLevel>
     </ClCompile>
+    <ClCompile Include="Subsystems\BasicsSubsystem.cpp" />
+    <ClCompile Include="Subsystems\MasterSubsystem.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="HID\BasicInput.cpp" />
     <ClCompile Include="HID\GamepadDevice.cpp" />

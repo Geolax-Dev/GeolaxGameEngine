@@ -84,7 +84,6 @@ namespace GGE::Parse
     protected:
         int _error;
         std::map<String, String> _values;
-        static String MakeKey(const String& section, const String& name);
         static int ValueHandler(void* user, const char* section, const char* name,
             const char* value);
     };
@@ -136,7 +135,5 @@ namespace GGE::Parse
         String SaveToString() const;
     private:
         std::map<String, String> _values; // section -> (name -> value)
-
-        static String MakeKey(const String& section, const String& name);
     };
 }

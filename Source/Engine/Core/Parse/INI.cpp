@@ -1,10 +1,15 @@
 #include "INI.h"
 
 #include <Core/IO/FileResourceManager.h>
-#include "inih/ini.h"
+#include "inih/cini.h"
 
 namespace GGE::Parse
 {
+    static String MakeKey(const String& section, const String& name)
+    {
+        return String(section + "=" + name).tolower();
+    }
+
     INIReader::INIReader(const String& filename)
     {
         _error = ini_parse(filename.c_str(), ValueHandler, this);
@@ -143,12 +148,6 @@ namespace GGE::Parse
     {
         String key = MakeKey(section, name);
         return _values.count(key) != 0;
-    }
-
-    String INIReader::MakeKey(const String& section, const String& name)
-    {
-        const String key = section + "=" + name;
-        return key.tolower();
     }
 
     int INIReader::ValueHandler(void* user, const char* section, const char* name,

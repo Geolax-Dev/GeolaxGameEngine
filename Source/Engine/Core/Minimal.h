@@ -8,6 +8,8 @@
 #include <Core/String.h>
 #include <Core/HashTable.h>
 
+#include <typeinfo>
+
 namespace GGE
 {
     struct DisplayPosition

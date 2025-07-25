@@ -271,6 +271,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App\RuntimeApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +284,9 @@
     <ProjectReference Include="..\..\ThirdParty\SIMD_String\SIMD_String.vcxproj">
       <Project>{fea86b5f-1c64-4be0-9780-8285896581b0}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App\RuntimeApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

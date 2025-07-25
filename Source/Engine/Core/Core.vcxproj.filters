@@ -87,10 +87,22 @@
     <ClInclude Include="ApplicationInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Parse\inih\ini.h">
+    <ClInclude Include="Parse\inih\cini.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Parse\INI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Subsystems\ISubsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Subsystems\BasicsSubsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -125,13 +137,25 @@
     <ClCompile Include="IO\FileResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Parse\inih\ini.c">
+    <ClCompile Include="Parse\inih\cini.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parse\INI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ApplicationInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Subsystems\MasterSubsystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Subsystems\BasicsSubsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

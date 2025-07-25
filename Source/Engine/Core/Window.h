@@ -156,6 +156,9 @@ namespace GGE
 
         [[maybe_unused]] Window();
 
+        [[maybe_unused]] Window(const Window&) = default;
+        [[maybe_unused]] Window(Window&&) noexcept = default;
+
         [[maybe_unused]] Window(
             const String& title,
             DisplayPosition position,
