@@ -19,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIMD_String", "ThirdParty\S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW-3.4", "ThirdParty\GLFW\GLFW-3.4.vcxproj", "{27A5FCD1-6F06-44BD-8CC4-BDA244547599}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphics", "Engine\Graphics\Graphics.vcxproj", "{FC72E491-289A-4810-8344-10A6E30A6C8D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spdlog", "ThirdParty\spdlog\spdlog.vcxproj", "{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Dev|x64 = Dev|x64
@@ -78,6 +82,26 @@ Global
 		{27A5FCD1-6F06-44BD-8CC4-BDA244547599}.FullOptimized|x64.Build.0 = FullOptimized|x64
 		{27A5FCD1-6F06-44BD-8CC4-BDA244547599}.Profiled|x64.ActiveCfg = Profiled|x64
 		{27A5FCD1-6F06-44BD-8CC4-BDA244547599}.Profiled|x64.Build.0 = Profiled|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.Dev|x64.ActiveCfg = Dev|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.Dev|x64.Build.0 = Dev|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.DistributionReady|x64.ActiveCfg = DistributionReady|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.DistributionReady|x64.Build.0 = DistributionReady|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.FullDebug|x64.ActiveCfg = FullDebug|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.FullDebug|x64.Build.0 = FullDebug|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.FullOptimized|x64.ActiveCfg = FullOptimized|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.FullOptimized|x64.Build.0 = FullOptimized|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.Profiled|x64.ActiveCfg = Profiled|x64
+		{FC72E491-289A-4810-8344-10A6E30A6C8D}.Profiled|x64.Build.0 = Profiled|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.Dev|x64.ActiveCfg = Dev|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.Dev|x64.Build.0 = Dev|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.DistributionReady|x64.ActiveCfg = DistributionReady|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.DistributionReady|x64.Build.0 = DistributionReady|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.FullDebug|x64.ActiveCfg = FullDebug|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.FullDebug|x64.Build.0 = FullDebug|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.FullOptimized|x64.ActiveCfg = FullOptimized|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.FullOptimized|x64.Build.0 = FullOptimized|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.Profiled|x64.ActiveCfg = Profiled|x64
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE}.Profiled|x64.Build.0 = Profiled|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +112,8 @@ Global
 		{1F0F5DDA-1D0F-4F0D-9EFC-B1570E5053A0} = {929E0B74-A9A1-4497-840B-0AE2074A3006}
 		{FEA86B5F-1C64-4BE0-9780-8285896581B0} = {A4B932FB-1E4D-4753-BF78-A431810C3B90}
 		{27A5FCD1-6F06-44BD-8CC4-BDA244547599} = {A4B932FB-1E4D-4753-BF78-A431810C3B90}
+		{FC72E491-289A-4810-8344-10A6E30A6C8D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EF93A255-E5B7-4B40-AFD0-F2E595BA05FE} = {A4B932FB-1E4D-4753-BF78-A431810C3B90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A56BA995-0B49-4486-B05D-ACE825A499E5}

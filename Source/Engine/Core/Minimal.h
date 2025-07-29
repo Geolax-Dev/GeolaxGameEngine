@@ -3,6 +3,8 @@
 #include <Core/Macros/MacroNamespace.h>
 #include <Core/Macros/MacroUtils.h>
 
+#include <Core/Logging.h>
+
 #include <Core/Primitives.h>
 #include <Core/Assert.h>
 #include <Core/String.h>

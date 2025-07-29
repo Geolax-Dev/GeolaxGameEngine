@@ -8,7 +8,9 @@ namespace GGE::IO
     {
     public:
         explicit RealFileSystemProvider(const String& mountPoint)
-            : m_mountPoint(mountPoint.std_string_view()) {}
+            : m_mountPoint(mountPoint.std_string_view()) {
+            GGE_LOG_INFO("RealFileSystemProvider created with mount point: {}", m_mountPoint.string());
+        }
 
         String GetMountPoint() const override
         {

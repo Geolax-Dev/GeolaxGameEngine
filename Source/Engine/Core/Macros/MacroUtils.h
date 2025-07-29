@@ -2,7 +2,7 @@
 
 #define GUARD_EXTERNAL_INCLUDE_BEGIN \
 __pragma(warning(push)) \
-//__pragma(warning(disable: 4668))
+__pragma(warning(disable: 4191 5026 5027))
 
 #define GUARD_EXTERNAL_INCLUDE_END \
 __pragma(warning(pop))

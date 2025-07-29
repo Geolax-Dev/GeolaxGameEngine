@@ -12,5 +12,9 @@ namespace GGE
 
         bool OnCreateSubsystem() override;
         void OnDestroySubsystem() override;
+
+    private:
+        bool SetupSpdlog();
+        void ShutdownSpdlog();
     };
 }

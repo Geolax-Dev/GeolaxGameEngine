@@ -7,6 +7,8 @@
 #include <Core/Configuration.h>
 #include <Core/HID/BasicInput.h>
 
+#include <Graphics/Subsystems/GraphicsSubsystem.h>
+
 namespace GGE
 {
 
@@ -23,22 +25,25 @@ namespace GGE
         if (InitializeGlfw())
         {
             MasterSubsytem::Get().RegisterSubsystem<BasicsSubsystem>();
+            MasterSubsytem::Get().RegisterSubsystem<GraphicsSubsystem>();
 
             if (!MasterSubsytem::Create())
             {
-                // TODO: log
+                GGE_LOG_CRITICAL("Failed to create MasterSubsystem");
                 return false;
             }
 
             m_window = Configuration::CreateWindowFromConfig();
             if (!m_window->IsOpened())
             {
-                // TODO: log
+                GGE_LOG_CRITICAL("Failed to create window from config");
                 return false;
             }
 
             HID::BasicInput::ResetWindow(*m_window);
             HID::BasicInput::Create();
+
+            
 
             m_running = true;
         }
@@ -73,6 +78,7 @@ namespace GGE
 
     void RuntimeApp::Destroy()
     {
+
         HID::BasicInput::Destroy();
 
         m_window->Destroy();

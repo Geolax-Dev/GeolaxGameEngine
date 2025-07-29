@@ -112,62 +112,66 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
+    <Import Project="..\..\Engine\vs2022\DistributionFlags.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
     <OutDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">
     <OutDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">
     <OutDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">
     <OutDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">
     <OutDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -176,7 +180,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;$(SolutionDir)ThirdParty\GLFW\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_GLFW_WIN32=1;_CRT_SECURE_NO_WARNINGS;SPDLOG_COMPILED_LIB=1;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -186,18 +190,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -205,9 +207,9 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;$(SolutionDir)ThirdParty\GLFW\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>_GLFW_WIN32=1;_CRT_SECURE_NO_WARNINGS;DISTRIBUTION_READY=1;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -217,18 +219,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -236,7 +236,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;$(SolutionDir)ThirdParty\GLFW\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_GLFW_WIN32=1;_CRT_SECURE_NO_WARNINGS;SPDLOG_COMPILED_LIB=1;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -246,18 +246,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -265,7 +263,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;$(SolutionDir)ThirdParty\GLFW\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_GLFW_WIN32=1;_CRT_SECURE_NO_WARNINGS;SPDLOG_COMPILED_LIB=1;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -275,25 +273,23 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\GLFW\include;$(SolutionDir)ThirdParty\GLFW\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_GLFW_WIN32=1;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>

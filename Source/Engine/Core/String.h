@@ -122,6 +122,75 @@ namespace GGE
         }
     };
 
+    // binary string operations
+    inline BaseSimdString<> operator+(const BaseSimdString<>& lhs, const BaseSimdString<>& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const BaseSimdString<>& lhs, const std::string& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const BaseSimdString<>& lhs, const std::string_view& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const BaseSimdString<>& lhs, const char* rhs)
+    {
+        BaseSimdString<> result(lhs);
+        if (rhs)
+        {
+            size_t len = std::strlen(rhs);
+            result.append(rhs, len);
+        }
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const BaseSimdString<>& lhs, char rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.push_back(rhs);
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const std::string& lhs, const BaseSimdString<>& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const std::string_view& lhs, const BaseSimdString<>& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(const char* lhs, const BaseSimdString<>& rhs)
+    {
+        BaseSimdString<> result(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
+    inline BaseSimdString<> operator+(char lhs, const BaseSimdString<>& rhs)
+    {
+        BaseSimdString<> result;
+        result.push_back(lhs);
+        result.append(rhs.data(), rhs.size());
+        return result;
+    }
+
     using String = BaseSimdString<>;
     using SmallString = BaseSimdString<16>;
 
@@ -143,6 +212,11 @@ namespace GGE
         std::string std_string() const
         {
             return std::string(this->data(), this->size());
+        }
+
+        std::string_view std_string_view() const
+        {
+            return std::string_view(this->data(), this->size());
         }
     };
 

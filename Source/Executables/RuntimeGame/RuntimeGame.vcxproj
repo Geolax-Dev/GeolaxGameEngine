@@ -76,24 +76,34 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
+    <Import Project="..\..\Engine\vs2022\DistributionFlags.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Engine\vs2022\CommonIncludes.props" />
+    <Import Project="..\..\Engine\vs2022\CommonMacros.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
     <LinkIncremental>false</LinkIncremental>
@@ -101,15 +111,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
-    <TargetName>$(ProjectName)-$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-Debug</TargetName>
     <LinkIncremental>false</LinkIncremental>
@@ -117,7 +125,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
     <LinkIncremental>false</LinkIncremental>
@@ -125,7 +132,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">
     <OutDir>$(SolutionDir)..\Game\</OutDir>
     <IntDir>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\</IntDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <TargetName>$(ProjectName)-$(Configuration)</TargetName>
     <LinkIncremental>false</LinkIncremental>
@@ -134,7 +140,6 @@
     <ClCompile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -148,7 +153,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -164,7 +168,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DISTRIBUTION_READY=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -177,7 +180,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
@@ -195,7 +197,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -208,7 +209,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -224,7 +224,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -237,7 +236,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -253,7 +251,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -265,7 +262,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MaxFilesInUnityFile>4</MaxFilesInUnityFile>
       <UnityFilesDirectory>$(SolutionDir).Build\$(Configuration)\$(ProjectName)\ObjectFiles\Unity</UnityFilesDirectory>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -283,11 +279,17 @@
     <ProjectReference Include="..\..\Engine\Core\Core.vcxproj">
       <Project>{3cfc4bd5-878e-41cb-b2f4-6e1a5bff1c25}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphics\Graphics.vcxproj">
+      <Project>{fc72e491-289a-4810-8344-10a6e30a6c8d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\ThirdParty\GLFW\GLFW-3.4.vcxproj">
       <Project>{27a5fcd1-6f06-44bd-8cc4-bda244547599}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\ThirdParty\SIMD_String\SIMD_String.vcxproj">
       <Project>{fea86b5f-1c64-4be0-9780-8285896581b0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdParty\spdlog\spdlog.vcxproj">
+      <Project>{ef93a255-e5b7-4b40-afd0-f2e595ba05fe}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

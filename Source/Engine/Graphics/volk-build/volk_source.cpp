@@ -1,0 +1,11 @@
+
+#include <Core/Minimal.h>
+
+#ifdef _WIN32
+#define VK_USE_PLATFORM_WIN32_KHR 1
+#endif
+
+#define VOLK_IMPLEMENTATION
+GUARD_EXTERNAL_INCLUDE_BEGIN
+#include <volk.h>
+GUARD_EXTERNAL_INCLUDE_END
