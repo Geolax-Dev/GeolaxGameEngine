@@ -11,11 +11,11 @@ GUARD_EXTERNAL_INCLUDE_END
 #if !DISTRIBUTION_READY
 
 // define a formatter with GGE::BaseSimdString<> and GGE::StringView
-namespace spdlog
+namespace std
 {
     // define for GGE::BaseSimdString<INTERNAL_SIZE, Allocator>
     template<size_t INTERNAL_SIZE, class Allocator>
-    struct std::formatter<GGE::BaseSimdString<INTERNAL_SIZE, Allocator>> : std::formatter<std::string>
+    struct formatter<GGE::BaseSimdString<INTERNAL_SIZE, Allocator>> : formatter<std::string>
     {
         auto format(const GGE::BaseSimdString<INTERNAL_SIZE, Allocator>& my, std::format_context& ctx) const -> decltype(ctx.out())
         {
@@ -44,11 +44,11 @@ namespace spdlog
 
 #else
 
-#define GGE_LOG_TRACE(...)
-#define GGE_LOG_DEBUG(...)
-#define GGE_LOG_INFO(...)
-#define GGE_LOG_WARN(...)
-#define GGE_LOG_ERROR(...)
-#define GGE_LOG_CRITICAL(...)
+#define GGE_LOG_TRACE(...) (void)0
+#define GGE_LOG_DEBUG(...) (void)0
+#define GGE_LOG_INFO(...) (void)0
+#define GGE_LOG_WARN(...) (void)0
+#define GGE_LOG_ERROR(...) (void)0
+#define GGE_LOG_CRITICAL(...) (void)0
 
 #endif // !DISTRIBUTION_READY

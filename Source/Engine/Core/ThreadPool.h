@@ -6,6 +6,7 @@
 #include <cassert>
 #include <functional>
 #include <future>
+#include <semaphore>
 #include <memory>
 #include <thread>
 #include <utility>
@@ -17,7 +18,7 @@ namespace GGE
     */
     class ThreadPool
     {
-        // A single-producer/multiple-consumer deque (Chase–Lev) for work stealing.
+        // A single-producer/multiple-consumer deque (Chaseâ€“Lev) for work stealing.
         class TaskDeque {
         public:
             using Task = std::function<void()>;
@@ -58,7 +59,7 @@ namespace GGE
                 bottom_.store(new_bottom, std::memory_order_relaxed);
                 task = std::move(buffer_[new_bottom & mask_]);
 
-                // 4) If more than one element remains, we’re done
+                // 4) If more than one element remains, weâ€™re done
                 if (old_bottom - old_top > 1) {
                     return true;
                 }
@@ -74,7 +75,7 @@ namespace GGE
                     return false;
                 }
 
-                // claimed the last item—reset bottom to original
+                // claimed the last itemâ€”reset bottom to original
                 bottom_.store(old_bottom, std::memory_order_relaxed);
                 return true;
             }
@@ -124,7 +125,7 @@ namespace GGE
 
         [[maybe_unused]] ~ThreadPool() {
             done_.store(true, std::memory_order_relaxed);
-            // let threads wake up if they’re spinning
+            // let threads wake up if theyâ€™re spinning
             for (auto& t : workers_)
                 if (t.joinable())
                     t.join();
@@ -184,5 +185,23 @@ namespace GGE
         std::vector<std::unique_ptr<TaskDeque>>  deques_;
         std::vector<std::thread>                 workers_;
         std::atomic<size_t>                      next_queue_idx_;
+    };
+
+    template<class T>
+    class LockedObject
+    {
+    public:
+        LockedObject(T& h, std::mutex& mtx)
+            : handle(h), lock(mtx)
+        {
+        }
+
+        ~LockedObject() = default;
+
+        operator T& () { return handle; }
+        operator const T& () const { return handle; }
+    private:
+        T& handle;
+        std::scoped_lock<std::mutex> lock;
     };
 }

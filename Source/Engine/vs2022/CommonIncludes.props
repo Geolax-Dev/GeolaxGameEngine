@@ -5,8 +5,11 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty/GLFW/include;$(SolutionDir)ThirdParty/SIMD_String;$(SolutionDir)ThirdParty/spdlog/include;$(SolutionDir)ThirdParty/volk;$(SolutionDir)ThirdParty/Vulkan-Headers/1.4.323/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Executables;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty/GLFW/include;$(SolutionDir)ThirdParty/SIMD_String;$(SolutionDir)ThirdParty/stb/include;$(SolutionDir)ThirdParty/spdlog/include;$(SolutionDir)ThirdParty/bx/include;$(SolutionDir)ThirdParty/bimg/include;$(SolutionDir)ThirdParty/bgfx/include;$(SolutionDir)ThirdParty/tracy;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/bgfx/.build/win64_vs2022/bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

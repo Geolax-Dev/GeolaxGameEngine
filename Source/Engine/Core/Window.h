@@ -2,6 +2,7 @@
 
 #include <Core/Minimal.h>
 #include <Core/HID/HIDBase.h>
+#include <Core/Event/WindowEvents.h>
 
 struct GLFWwindow;
 struct GLFWmonitor;
@@ -19,9 +20,10 @@ namespace GGE
             uint32 vsync : 1;
             uint32 maximized : 1;
             uint32 hidden : 1;
+            uint32 tripplebuffering : 1;
 
             [[maybe_unused]] Bits()
-                : fullscreen(0), resizable(1), vsync(1), maximized(0), hidden(0) 
+                : fullscreen(0), resizable(1), vsync(1), maximized(0), hidden(0), tripplebuffering(0)
             { }
 
         };
@@ -58,6 +60,12 @@ namespace GGE
             [[maybe_unused]] BitsBuilder& Hidden(bool enable)
             {
                 m_tmp.hidden = uint32(enable);
+                return *this;
+            }
+
+            [[maybe_unused]] BitsBuilder& TrippleBuffering(bool enable)
+            {
+                m_tmp.tripplebuffering = uint32(enable);
                 return *this;
             }
 
@@ -145,6 +153,12 @@ namespace GGE
                 return *this;
             }
 
+            [[maybe_unused]] WindowBuilder& TrippleBuffering(bool enable)
+            {
+                m_tmp.bits.tripplebuffering = uint32(enable);
+                return *this;
+            }
+
             [[maybe_unused]] Data Build() const
             {
                 return m_tmp;
@@ -195,6 +209,8 @@ namespace GGE
 
         [[maybe_unused]] void MakeNormal();
 
+        [[maybe_unused]] void EnableTripleBuffering(bool enable);
+
         [[maybe_unused]] const String& GetTitle() const { return m_title; }
 
         [[maybe_unused]] GLFWwindow* GetGLFW() const { return m_windowHandle; }
@@ -221,9 +237,16 @@ namespace GGE
 
         [[maybe_unused]] bool IsHidden() const { return bool(m_bits.hidden); }
 
+        [[maybe_unused]] bool IsTrippleBuffering() const { return bool(m_bits.tripplebuffering); }
+
         [[maybe_unused]] bool IsOpened() const { return m_opened; }
 
         [[maybe_unused]] void PollOS();
+
+        [[maybe_unused]] WindowEventSubscribers& GetEventSubscribers()
+        {
+            return m_eventSubscribers;
+        }
 
         [[maybe_unused]] HID::Element GetLastElement(HID::DeviceKind dk, bool gamepadAxis = false) const
         {
@@ -266,6 +289,7 @@ namespace GGE
         }
     private:
         String m_title{};
+        WindowEventSubscribers m_eventSubscribers{};
         GLFWwindow* m_windowHandle{};
         GLFWmonitor* m_monitorHandle{};
         DisplayPosition m_position{};

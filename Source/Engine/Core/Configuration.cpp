@@ -34,6 +34,7 @@ namespace GGE
                 .VerticalSync(iniReader.GetBoolean("Window", "bVSync", false))
                 .Hidden(iniReader.GetBoolean("Window", "bStartHidden", false))
                 .Maximized(iniReader.GetBoolean("Window", "bStartMaximized", false))
+                .TrippleBuffering(iniReader.GetBoolean("Window", "bTrippleBuffering", false))
                 .Build();
 
             GGE_ASSERT(window->Create(wbd) && "Failed to create window from .ini config!");

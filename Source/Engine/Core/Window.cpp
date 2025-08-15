@@ -109,7 +109,65 @@ namespace GGE
             glfwSetWindowCloseCallback(m_windowHandle, [](GLFWwindow* window) 
                 {
                     Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    auto event = WindowCloseEvent{};
+                    w.GetEventSubscribers().NotifyAll(event);
                     w.Destroy();
+                });
+
+            glfwSetWindowSizeCallback(m_windowHandle, [](GLFWwindow* window, int width, int height)
+                {
+                    Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    w.m_size = DisplaySize(uint32(width), uint32(height));
+                    auto event = WindowResizeEvent(uint32(width), uint32(height));
+                    w.GetEventSubscribers().NotifyAll(event);
+                });
+
+            glfwSetWindowFocusCallback(m_windowHandle, [](GLFWwindow* window, int focused)
+                {
+                    Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    if (focused)
+                    {
+                        auto event = WindowFocusEvent{};
+                        w.GetEventSubscribers().NotifyAll(event);
+                    }
+                    else
+                    {
+                        auto event = WindowLostFocusEvent{};
+                        w.GetEventSubscribers().NotifyAll(event);
+                    }
+                });
+
+            glfwSetWindowIconifyCallback(m_windowHandle, [](GLFWwindow* window, int iconified)
+                {
+                    Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    if (iconified)
+                    {
+                        auto event = WindowMinimizedEvent{};
+                        w.GetEventSubscribers().NotifyAll(event);
+                    }
+                    else
+                    {
+                        auto event = WindowRestoredEvent{};
+                        w.GetEventSubscribers().NotifyAll(event);
+                    }
+                });
+
+            glfwSetWindowMaximizeCallback(m_windowHandle, [](GLFWwindow* window, int maximized)
+                {
+                    Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    if (maximized)
+                    {
+                        auto event = WindowMaximizedEvent{};
+                        w.GetEventSubscribers().NotifyAll(event);
+                    }
+                });
+
+            glfwSetWindowPosCallback(m_windowHandle, [](GLFWwindow* window, int xpos, int ypos)
+                {
+                    Window& w = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+                    w.m_position = DisplayPosition(xpos, ypos);
+                    auto event = WindowMovedEvent(xpos, ypos);
+                    w.GetEventSubscribers().NotifyAll(event);
                 });
 
             glfwSetWindowUserPointer(m_windowHandle, this);
@@ -191,6 +249,12 @@ namespace GGE
 
         m_bits.hidden = false;
         m_bits.fullscreen = false;
+    }
+
+    void Window::EnableTripleBuffering(bool enable)
+    {
+        m_bits.tripplebuffering = uint32(enable);
+        m_bits.vsync = uint32(enable); // enable vsync if triple buffering is enabled
     }
 
     void Window::PollOS()

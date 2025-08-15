@@ -20,21 +20,18 @@ namespace GGE
             return s_instance;
         }
 
-        [[maybe_unused]] static inline bool Create() {
+        template<class...Args>
+        [[maybe_unused]] static inline void Create(Args&&...args) {
             GGE_ASSERT(!s_instance && "Singleton double creation!");
 
-            s_instance = new T();
-            return s_instance->OnCreate();
+            s_instance = new T(std::forward<Args>(args)...);
         }
 
         [[maybe_unused]] static inline void Destroy() {
             GGE_ASSERT(s_instance && "Destroy of non-initialized Singleton!");
-            s_instance->OnDestroy();
             delete s_instance;
         }
 
-        virtual bool OnCreate() = 0;
-        virtual void OnDestroy() {}
     private:
         static inline T* s_instance{};
 

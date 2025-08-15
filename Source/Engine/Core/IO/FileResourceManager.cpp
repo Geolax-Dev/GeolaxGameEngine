@@ -33,13 +33,11 @@ namespace GGE::IO
         return path;
     }
 
-    bool FileResourceManager::OnCreate()
+    FileResourceManager::FileResourceManager() 
+        : m_cache(new LRUCache<String, RawResource>(1024ull * 1024ull * 10024ull)) // 1G cache
     {
-        m_cache = new LRUCache<String, RawResource>(1024ull * 1024ull * 10024ull); // 1024 MB cache
-
-        return true;
     }
-    void FileResourceManager::OnDestroy()
+    FileResourceManager::~FileResourceManager()
     {
         if (m_cache)
         {

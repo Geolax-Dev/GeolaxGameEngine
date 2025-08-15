@@ -52,6 +52,20 @@ namespace GGE
             return std::string_view(this->data(), this->size());
         }
 
+        template<std::integral T>
+        static BaseSimdString hex(T v)
+        {
+            static constexpr char kHex[] = "0123456789abcdef";
+            std::array<char, 16> out{};
+            for (int i = 15; i >= 0; --i) 
+            { 
+                out[i] = kHex[v & 0xF]; 
+                v >>= 4; 
+            }
+
+            return BaseSimdString(out.begin(), out.end());
+        }
+
         BaseSimdString substr(size_t pos = 0, size_t count = std::string::npos) const
         {
             if (pos > this->size())

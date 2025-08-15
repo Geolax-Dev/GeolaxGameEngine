@@ -291,6 +291,9 @@
     <ProjectReference Include="..\..\ThirdParty\spdlog\spdlog.vcxproj">
       <Project>{ef93a255-e5b7-4b40-afd0-f2e595ba05fe}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\ThirdParty\stb\stb.vcxproj">
+      <Project>{f9f41bf7-2529-4198-92e8-efd40bd4358c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\RuntimeApp.h" />

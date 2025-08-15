@@ -11,18 +11,18 @@ namespace GGE
         virtual ~ISubsystem() = default;
 
         virtual bool OnCreateSubsystem() = 0;
+        virtual bool OnPostCreateSubsystem() { return true; }
         virtual void OnDestroySubsystem() = 0;
         virtual bool OnUpdateSubsystem() { return true; }
     };
 
-    class MasterSubsytem : public ISubsystem, public Singleton<MasterSubsytem>
+    class MasterSubsystem : public ISubsystem, public Singleton<MasterSubsystem>
     {
     public:
-        MasterSubsytem() = default;
-        ~MasterSubsytem() override = default;
+        MasterSubsystem();
+        ~MasterSubsystem() override;
 
-        bool OnCreate() override;
-        void OnDestroy() override;
+        bool OnPostCreateSubsystem() override;
 
         bool OnUpdateSubsystem() override;
 
@@ -35,7 +35,7 @@ namespace GGE
         template<class SubsystemClass>
         SubsystemClass* GetSubsystem()
         {
-            return s_subsystems[typeid(SubsystemClass).name()].get();
+            return (SubsystemClass*)(s_subsystems[typeid(SubsystemClass).name()].get());
         }
     private:
         static inline StringHashTable<std::unique_ptr<ISubsystem>> s_subsystems{};

@@ -16,13 +16,11 @@ namespace GGE::HID
     class BasicInput : public Singleton<BasicInput>
     {
     public:
-        BasicInput() = default;
+        BasicInput();
         BasicInput(const BasicInput&) = delete;
         BasicInput& operator=(const BasicInput&) = delete;
         BasicInput(BasicInput&&) noexcept = delete;
         BasicInput& operator=(BasicInput&&) noexcept = delete;
-
-        bool OnCreate() override;
 
         [[maybe_unused]] static inline void ResetWindow(const Window& window)
         {

@@ -1,16 +1,29 @@
 #include "ISubsystem.h"
 
-bool GGE::MasterSubsytem::OnCreate()
+GGE::MasterSubsystem::MasterSubsystem()
 {
-    return OnCreateSubsystem();
+    OnCreateSubsystem();
 }
 
-void GGE::MasterSubsytem::OnDestroy()
+bool GGE::MasterSubsystem::OnPostCreateSubsystem()
+{
+    bool bSuccess = true;
+    for (auto& [_, ss] : s_subsystems)
+    {
+        bSuccess &= ss->OnPostCreateSubsystem();
+        if (!bSuccess) break;
+    }
+
+    GGE_ASSERT(bSuccess && "Failed to successfully post-initialize all registered subsystems!");
+    return bSuccess;
+}
+
+GGE::MasterSubsystem::~MasterSubsystem()
 {
     OnDestroySubsystem();
 }
 
-bool GGE::MasterSubsytem::OnCreateSubsystem()
+bool GGE::MasterSubsystem::OnCreateSubsystem()
 {
     bool bSuccess = true;
 
@@ -25,7 +38,7 @@ bool GGE::MasterSubsytem::OnCreateSubsystem()
     return bSuccess;
 }
 
-void GGE::MasterSubsytem::OnDestroySubsystem()
+void GGE::MasterSubsystem::OnDestroySubsystem()
 {
     // reversed destroy
 
@@ -43,7 +56,7 @@ void GGE::MasterSubsytem::OnDestroySubsystem()
 
 }
 
-bool GGE::MasterSubsytem::OnUpdateSubsystem()
+bool GGE::MasterSubsystem::OnUpdateSubsystem()
 {
     bool bSuccess = true;
 

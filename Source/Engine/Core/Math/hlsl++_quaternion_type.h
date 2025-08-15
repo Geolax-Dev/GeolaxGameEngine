@@ -1,0 +1,1 @@
+#include <Core/Math/hlsl++/quaternion_type.h>

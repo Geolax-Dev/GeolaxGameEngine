@@ -23,13 +23,39 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bgfx-link.h" />
+    <ClCompile Include="Rendering\Camera.cpp" />
     <ClCompile Include="Subsystems\GraphicsSubsystem.cpp" />
-    <ClCompile Include="volk-build\volk_source.cpp" />
-    <ClCompile Include="VulkanHeaders.cpp" />
+    <ClCompile Include="Tools\BgfxCacher.cpp" />
+    <ClCompile Include="Tools\BgfxCallback.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">Level2</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="Tools\BgfxCapturer.cpp" />
+    <ClCompile Include="Tools\BgfxPrinter.cpp" />
+    <ClCompile Include="Tools\BgfxProfiler.cpp" />
+    <ClCompile Include="tracy-build.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullOptimized|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='DistributionReady|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='FullDebug|x64'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">Level2</WarningLevel>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Rendering\Camera.h" />
+    <ClInclude Include="Rendering\IRenderer.h" />
+    <ClInclude Include="Rendering\RendererMaster.h" />
     <ClInclude Include="Subsystems\GraphicsSubsystem.h" />
-    <ClInclude Include="VulkanHeaders.h" />
+    <ClInclude Include="Tools\BgfxCacher.h" />
+    <ClInclude Include="Tools\BgfxCallback.h" />
+    <ClInclude Include="Tools\BgfxCapturer.h" />
+    <ClInclude Include="Tools\BgfxPrinter.h" />
+    <ClInclude Include="Tools\BgfxProfiler.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

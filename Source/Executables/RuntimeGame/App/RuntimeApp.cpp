@@ -9,6 +9,8 @@
 
 #include <Graphics/Subsystems/GraphicsSubsystem.h>
 
+#include <Graphics/bgfx-link.h>
+
 namespace GGE
 {
 
@@ -24,19 +26,22 @@ namespace GGE
     {
         if (InitializeGlfw())
         {
-            MasterSubsytem::Get().RegisterSubsystem<BasicsSubsystem>();
-            MasterSubsytem::Get().RegisterSubsystem<GraphicsSubsystem>();
-
-            if (!MasterSubsytem::Create())
-            {
-                GGE_LOG_CRITICAL("Failed to create MasterSubsystem");
-                return false;
-            }
+            MasterSubsystem::Get().RegisterSubsystem<BasicsSubsystem>();
+            MasterSubsystem::Get().RegisterSubsystem<GraphicsSubsystem>();
+            MasterSubsystem::Create();
 
             m_window = Configuration::CreateWindowFromConfig();
             if (!m_window->IsOpened())
             {
                 GGE_LOG_CRITICAL("Failed to create window from config");
+                return false;
+            }
+
+            GraphicsSubsystem::SetCurrentWindow(m_window);
+
+            if (!MasterSubsystem::Get().OnPostCreateSubsystem())
+            {
+                GGE_LOG_CRITICAL("Failed to post-initialize GraphicsSubsystem");
                 return false;
             }
 
@@ -68,7 +73,7 @@ namespace GGE
                 continue;
             }
 
-            iterationWasOk &= MasterSubsytem::Get().OnUpdateSubsystem();
+            iterationWasOk &= MasterSubsystem::Get().OnUpdateSubsystem();
 
             m_window->PollOS();
         }
@@ -84,7 +89,7 @@ namespace GGE
         m_window->Destroy();
         m_window.reset();
 
-        MasterSubsytem::Destroy();
+        MasterSubsystem::Destroy();
         ShutdownGlfw();
     }
 

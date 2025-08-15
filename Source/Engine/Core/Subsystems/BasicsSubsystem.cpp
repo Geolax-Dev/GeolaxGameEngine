@@ -60,17 +60,15 @@ bool GGE::BasicsSubsystem::SetupSpdlog()
     spdlog::init_thread_pool(8192, 2); // queue with 8k items and 2 backing threads.
 
     // create a logger that logs to both console and file with multiple sinks
-    g_spdlog_logger = std::make_shared<spdlog::async_logger>(
-        "async_file_logger",
+    g_spdlog_logger = std::make_shared<spdlog::logger>(
+        "spdlog_logger",
         spdlog::sinks_init_list{
             std::make_shared<spdlog::sinks::stdout_color_sink_mt>(),
             std::make_shared<spdlog::sinks::basic_file_sink_mt>(
                 (IO::FileResourceManager::Get().GetExecutablePath() + ".log.txt").std_string(), true
             ),
             std::make_shared<spdlog::sinks::msvc_sink_mt>()
-        },
-        spdlog::thread_pool(),
-        spdlog::async_overflow_policy::block
+        }
     );
 
     g_spdlog_logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%l] [thread %t] %v");

@@ -1,11 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="volk-build\volk_source.cpp" />
     <ClCompile Include="Subsystems\GraphicsSubsystem.cpp" />
+    <ClCompile Include="bgfx-link.h" />
+    <ClCompile Include="Tools\BgfxPrinter.cpp" />
+    <ClCompile Include="Tools\BgfxCallback.cpp" />
+    <ClCompile Include="tracy-build.cpp" />
+    <ClCompile Include="Tools\BgfxProfiler.cpp" />
+    <ClCompile Include="Tools\BgfxCacher.cpp" />
+    <ClCompile Include="Tools\BgfxCapturer.cpp" />
+    <ClCompile Include="Rendering\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VulkanHeaders.h" />
     <ClInclude Include="Subsystems\GraphicsSubsystem.h" />
+    <ClInclude Include="Tools\BgfxCallback.h" />
+    <ClInclude Include="Tools\BgfxPrinter.h" />
+    <ClInclude Include="Tools\BgfxProfiler.h" />
+    <ClInclude Include="Tools\BgfxCapturer.h" />
+    <ClInclude Include="Tools\BgfxCacher.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Rendering\IRenderer.h" />
+    <ClInclude Include="Rendering\RendererMaster.h" />
+    <ClInclude Include="Rendering\Camera.h" />
   </ItemGroup>
 </Project>

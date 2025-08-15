@@ -46,13 +46,15 @@ namespace GGE::IO
         virtual std::unique_ptr<std::istream> OpenRead(const StringView& localPath) const = 0;
         virtual std::unique_ptr<std::ostream> OpenWrite(const StringView& localPath) const = 0;
         virtual std::vector<String> List(const StringView& localPath) const = 0;
+        virtual void Move(const StringView& oldVirtualPath, const StringView& newVirtualPath) const = 0;
+        virtual size_t GetSize(const StringView& virtualPath) const = 0;
     };
 
     class FileResourceManager final : public Singleton<FileResourceManager>
     {
     public:
-        FileResourceManager() = default;
-        ~FileResourceManager() override = default;
+        FileResourceManager();
+        ~FileResourceManager() override;
         FileResourceManager(const FileResourceManager&) = delete;
         FileResourceManager(FileResourceManager&&) = delete;
         FileResourceManager& operator=(const FileResourceManager&) = delete;
@@ -134,18 +136,29 @@ namespace GGE::IO
             return provider->OpenWrite(localPath);
         }
 
+        void Move(const StringView& oldVirtualPath, const StringView& newVirtualPath) const
+        {
+            auto& [provider, localPath] = ResolvePath(oldVirtualPath);
+            if (provider && provider->Exists(localPath))
+                provider->Move(localPath, ResolvePath(newVirtualPath).second);
+        }
+
         bool Exists(const StringView& virtualPath) const
         {
             auto& [provider, localPath] = ResolvePath(virtualPath);
             return provider && provider->Exists(localPath);
         }
 
+        size_t GetSize(const StringView& virtualPath) const
+        {
+            auto& [provider, localPath] = ResolvePath(virtualPath);
+            return provider ? provider->GetSize(localPath) : 0u;
+        }
+
         String GetExecutablePath() const;
 
         String GetExecutableDirectory() const;
 
-        bool OnCreate() override;
-        void OnDestroy() override;
     private:
         mutable std::shared_mutex m_mutex{};
         StringHashTable<std::shared_ptr<IFileSystemProvider>> m_fileSystemProviders{};

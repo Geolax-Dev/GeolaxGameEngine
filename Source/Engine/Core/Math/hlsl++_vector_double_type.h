@@ -1,0 +1,1 @@
+#include <Core/Math/hlsl++/vector_double_type.h>

@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <array>
 #include <type_traits>
 
 #define REDEFINE_STD_TYPE_WITHOUT_T(x) \

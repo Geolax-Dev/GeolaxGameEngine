@@ -1,10 +1,12 @@
 #pragma once
 
 #include <Core/Subsystems/ISubsystem.h>
-#include <Graphics/VulkanHeaders.h>
+#include <Graphics/Rendering/RendererMaster.h>
 
 namespace GGE
 {
+    class Window; // Forward declaration
+
     class GraphicsSubsystem : public ISubsystem
     {
     public:
@@ -12,19 +14,15 @@ namespace GGE
         ~GraphicsSubsystem() override = default;
 
         bool OnCreateSubsystem() override;
+        bool OnPostCreateSubsystem() override;
+        bool OnUpdateSubsystem() override;
         void OnDestroySubsystem() override;
 
-        static std::vector<const char*> GetRequiredInstanceExtensions();
-        static std::vector<const char*> GetRequiredInstanceLayers();
+        static void SetCurrentWindow(std::shared_ptr<Window>);
+        static std::shared_ptr<Window> GetCurrentWindow();
 
-        VkInstance GetVkInstance() const
-        {
-            return m_vkInstance;
-        }
     private:
-        VkInstance m_vkInstance{ VK_NULL_HANDLE };
 
-        bool InitializeVulkanInstance();
-        void DestroyVulkanInstance();
+        static std::shared_ptr<Window> s_CurrentWindow;
     };
 }

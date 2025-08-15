@@ -40,10 +40,15 @@ void GGE::Assert(const char* expr, const char* source, int sourceLine)
         std::fprintf(stderr, "%s", message.c_str());
         std::fflush(stderr);
     }
-    else {
-        // Fallback to GUI message box
-        Internal::ShowGuiMessageBox(message);
+    
+    Internal::ShowGuiMessageBox(message);
+
+#if _WIN32
+    if (IsDebuggerPresent()) {
+        // If debugger is attached, break into it
+        DebugBreak();
     }
+#endif
 
     std::abort(); // Terminate program
 }

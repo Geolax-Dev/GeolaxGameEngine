@@ -1,12 +1,10 @@
 #include "BasicInput.h"
 
-bool GGE::HID::BasicInput::OnCreate()
+GGE::HID::BasicInput::BasicInput()
 {
     KeyboardDevice::ProvideBasicInput(this);
     MouseDevice::ProvideBasicInput(this);
     GamepadDevice::ProvideBasicInput(this);
-
-    return true;
 }
 
 bool GGE::HID::BasicInput::IsPressed(KeyboardKey key) const
